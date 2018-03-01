@@ -264,6 +264,9 @@ root@gobgp3:~#  gobgp global rib -a evpn
 #### gobgp1 -> gobgp2
 
 `ifconfig`だとgobgp2は`192.168.1.3`では？
+→`config-interface.sh`では`192.168.1.4`で設定されている
+
+`netns`コマンドで確認できるようにしたい。`ip link`?
 
 ```
 root@gobgp1:~# ip netns exec vxlan ping -c 5 192.168.1.4
@@ -283,7 +286,8 @@ rtt min/avg/max/mdev = 0.505/201.409/1002.745/400.668 ms, pipe 2
 
 `ifconfig`だとgobgp2は`192.168.1.5`では？
 
-`config-interface.sh`を見ると以下のように設定されているのでよさそう。`netns`の勉強が必要。
+`config-interface.sh`を見ると以下のように設定されている。
+
 ```
 ip netns exec vxlan ifconfig veth0 192.168.1.4 up
 ```
